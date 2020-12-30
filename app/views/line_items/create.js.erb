@@ -1,0 +1,8 @@
+items = document.querySelectorAll("#cart tr")
+cart = document.querySelector("#cart")
+
+if (items.length === 2) { setTimeout(function(){ alert('Hello World'); }, 1000); }
+cart.innerHTML = "<%= j render(@cart) %>"
+
+notice = document.getElementById("notice")
+if (notice) notice.style.display = "none"

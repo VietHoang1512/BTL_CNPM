@@ -1,0 +1,60 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @product.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @product.description %>
+</p>
+
+<p>
+  <strong>Image: </strong>
+  <%= image_tag(@product.image_url, style:'height:10vw;width:12vw;') %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @product.price %>
+</p>
+
+<p>
+  <strong>Discount :</strong>
+  <%= "#{@product.discount_percentage} %" %>
+</p>
+
+<% if @product.comments.count > 0 %>
+  <p>
+    <strong>Average rating:</strong>
+    <%= @product.avg_rating %>
+  </p>
+<% end %>
+
+<div class="card mb-3">
+    <div class="card-header">
+        <h4 class="mb-0">Add A Comment:</h4>
+    </div>
+    <div class="card-body">
+        <%# NOTE COMMENT STEP 3: Load the comment form. %>
+        <%= render "comments/form" %>
+    </div>
+</div>
+
+<div>
+    <div class="card-header">
+        <h4>Comments:</h4>
+    </div>
+    <%# NOTE COMMENT STEP 3: Wrap the comments in `<div id="comments">` so that you can select the wrapper when using javascript in `app/views/comments/create.js.erb`. %>
+    <div id="comments" class="">
+      <%= render @product.comments %>
+    </div>
+</div>
+
+<br>
+
+<% if can? :manage, User %>
+  <%= link_to 'Edit', edit_product_path(@product) %> |
+  <%= link_to 'Back', products_path %>
+<% end %>
